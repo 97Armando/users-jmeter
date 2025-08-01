@@ -1,0 +1,21 @@
+## Conclusiones del Ejercicio de Prueba de Carga
+
+## Resumen de la Prueba
+La prueba de carga se ejecutó con un total de 200 muestras (requests) contra el servicio de login. El escenario simuló un comportamiento de 200 usuarios concurrentes, lo cual nos permitió alcanzar una tasa de 19.31 transacciones por segundo (TPS), acercándose a la meta de 20 TPS.
+
+## Hallazgos y Resultados
+
+## 1. Tiempo de Respuesta
+El tiempo de respuesta promedio fue de *404.94 milisegundos*, lo cual es significativamente menor al máximo permitido de *1,500 milisegundos*. Sin embargo, se identificaron dos peticiones que superaron este umbral, 
+con tiempos de 3,854 ms y 1,666 ms. Aunque estos casos fueron atípicos (dos de 200), demuestran una potencial inestabilidad o picos de latencia en el servicio bajo carga.
+
+## 2. Tasa de Error
+La tasa de error global fue de *1%*, lo cual está por debajo del límite aceptable del *3%*. Esto indica que, a pesar de los picos de latencia, el servicio de login se mantuvo estable y funcional para la gran mayoría de las peticiones. 
+Los dos errores registrados fueron precisamente las peticiones que excedieron el tiempo de respuesta, lo que sugiere que la validación de duración en JMeter fue la causa de estas fallas.
+
+## Conclusiones
+
+- El servicio de login de 'fakestoreapi.com' es capaz de manejar una carga cercana a *20 TPS* de manera eficiente.
+- La mayoría de las peticiones se procesaron de forma óptima, cumpliendo con el requisito de tiempo de respuesta de 1.5 segundos.
+- Se detectaron picos de latencia que causaron que un *1%* de las peticiones fallara la validación de duración. Aunque la tasa de error es baja y aceptable para este ejercicio, estos incidentes esporádicos son un indicador de que el servicio podría presentar cuellos de botella en el tiempo de respuesta.
+- Se recomienda investigar la causa de estos picos de latencia para asegurar que el servicio pueda mantener un rendimiento consistente bajo cargas más sostenidas o intensas.
